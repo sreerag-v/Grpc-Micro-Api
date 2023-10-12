@@ -1,0 +1,57 @@
+definitions:
+  main.ErrResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  main.SignUpRequest:
+    properties:
+      email:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      password:
+        type: string
+    type: object
+  main.SuccResponse:
+    type: object
+info:
+  contact:
+    email: sreeraghrg@gmail.com
+    name: Sreerag.V
+    url: https://github.com/sreerag-v
+  description: Sample Grpc Cilent-Server Interaction
+  title: Documenting API (Micro-Grpc)
+  version: "1.0"
+paths:
+  /signup:
+    post:
+      consumes:
+      - application/json
+      description: Create a new user account
+      parameters:
+      - description: User registration details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/main.SignUpRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.ErrResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.ErrResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.SuccResponse'
+      summary: Create a new user
+swagger: "2.0"
